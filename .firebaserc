@@ -1,5 +1,5 @@
 {
   "projects": {
-    "nextjs": "react-next-a3eb9"
+    "nextjs": "<firebase-project-name>"
   }
 }
