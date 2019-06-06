@@ -54,7 +54,7 @@ export async function GetFirestore (){
         }
     });
   }
-  export async function GetDbAtOn()
+  export async function GetDbAtOn(cb)
   {
     let firebase =await LoadDb();
     return await new Promise(async (resolve,reject)=>{
@@ -73,7 +73,7 @@ export async function GetFirestore (){
             console.log("database Değişti.");
             console.log(data);
             resolve(data);
-            //that.GetChangeState(data);
+            cb(data);
           });
       } catch (e) {
           console.log(e);

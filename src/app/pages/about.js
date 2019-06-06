@@ -1,9 +1,8 @@
 // src/app/pages/About.js
 
-import Nav from '../components/Nav.js'
+import Layout from '../components/Layout.js'
 
 export default () =>
-  <>
-    <Nav />
+  <Layout>
     <p>About page</p>
-  </>
+  </Layout>
