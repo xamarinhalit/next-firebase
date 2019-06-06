@@ -1,0 +1,25 @@
+.nav{
+    list-style:none;
+    display:flex;
+    flex-direction:row;
+    align-content: flex-start;
+        padding: 1em;    
+    li{
+        &>a{
+            text-decoration:none;
+            color:blueviolet;
+            &:hover{
+                color: greenyellow;
+            }
+        }
+        :hover{
+            padding: 1em;
+            margin: -1em;  
+            background-color: gray;
+            
+        }
+        &:first-child>a{
+            margin-right: 5em;
+        }
+    }
+}
