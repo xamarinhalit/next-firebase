@@ -11,16 +11,17 @@ class index extends Component {
   constructor(props){
     super(props);
     this.state={
-      data:[]
+      data:[
+      ]
     }
   }
-  // static async getInitialProps() {
-  //   let result =await GetDatabase();
-  //   this.state={
-  //     data:[...result]
-  //   }
-  //   return { data :result}; 
-  // }
+  static async getInitialProps() {
+    let data=await GetDatabase();
+    return {
+      data:data==undefined?[]:data
+    }
+    
+  }
 
   GetChangeState(data){
     this.setState({
@@ -36,9 +37,9 @@ class index extends Component {
 
   render(){
     return(
-             <Jumbotron>
-        <DataList data={this.state.data}></DataList>
-        </Jumbotron>
+      <Jumbotron>
+          <DataList data={this.state.data?this.props.data:this.state.data}></DataList>
+      </Jumbotron>
     )
   }
 }

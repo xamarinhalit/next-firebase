@@ -1,6 +1,5 @@
 // src/app/components/Nav.js
-import { Navbar,Nav,Form,FormControl } from 'react-bootstrap';
-
+import { Navbar,Nav,Form,FormControl,Button } from 'react-bootstrap';
 
 // Next.js has a nice router we'll use
 
@@ -16,7 +15,7 @@ export default Navs =>(
       <Form inline>
           <FormControl type="text" placeholder="Arama" className="mr-sm-2 ml-sm-2" >
           </FormControl>
-              <a href="/" variant="outline-success">Arama</a>
+          <Button href="/" variant="outline-success">Arama</Button>
       </Form>
       
      
