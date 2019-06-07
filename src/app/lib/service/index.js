@@ -2,9 +2,9 @@ import LoadDb from "../firestore";
 import uuid from 'uuid';
 
 
-export  function GetFirestore (){
-    // let firebase =await LoadDb();
-    return  new Promise(async (resolve,reject)=>{
+export async function GetFirestore (){
+    let firebase =await LoadDb();
+    return await new Promise(async (resolve,reject)=>{
       try {
             firebase.firestore().collection("next-db")
             .get()
@@ -25,9 +25,9 @@ export  function GetFirestore (){
         }
     });
   }
-const firebase = LoadDb();
-  export  function GetDatabase (){
-    return new Promise(async (resolve,reject)=>{
+  export async function GetDatabase (){
+    let firebase =await LoadDb();
+    return await new Promise(async (resolve,reject)=>{
       try {
         firebase.database().ref("/next-db").once('value', function(snapshot) {
               let data= [];
@@ -47,10 +47,10 @@ const firebase = LoadDb();
         }
     });
   }
-  export function GetDbAtOn(cb)
+  export async function GetDbAtOn(cb)
   {
-    // let firebase =await LoadDb();
-    return new Promise(async (resolve,reject)=>{
+    let firebase =await LoadDb();
+    return await new Promise(async (resolve,reject)=>{
     try {
       firebase.database().ref("/next-db").on('value', function(snapshot) {
             let data= [];
