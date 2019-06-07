@@ -17,14 +17,10 @@ export async function GetFirestore (){
                       },doc.data())
                     );
                   });
-                  console.log("firebase bağlandım");
-                  console.log(data);
-
                   resolve(data);
               }
               )
         } catch (e) {
-          console.log(e);
           reject({ data:undefined});
         }
     });
@@ -44,12 +40,9 @@ export async function GetFirestore (){
                   id:_key
                 })
               });
-              console.log("database bağlandım");
-              console.log(data);
               resolve(data);
             });
         } catch (e) {
-          console.log(e);
           reject({ data:null});
         }
     });
@@ -70,13 +63,10 @@ export async function GetFirestore (){
                 id:_key
               })
             });
-            console.log("database Değişti.");
-            console.log(data);
-            resolve(data);
             cb(data);
+            resolve(data);
           });
       } catch (e) {
-          console.log(e);
             reject({ data:null});
     }
     });

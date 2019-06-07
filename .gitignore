@@ -68,3 +68,7 @@ node_modules/
 
 # Next JS
 dist/
+.next/
+
+#firebase
+#.firebaserc

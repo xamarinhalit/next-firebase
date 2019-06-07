@@ -1,7 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
 
-export  default function LoadDb() {
+import firebase from 'firebase/app';
+//import 'firebase/firestore';
+export  default async function LoadDb() {
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -11,8 +11,13 @@ const config = {
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.FIREBASE_SENDER_ID,
 };
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
+try {
+  if(firebase.app.length>0)
+  await firebase.initializeApp(config);
+} catch (e) {
+  
 }
+// if (!firebase.apps.length) {
+// }
 return firebase;
 }
