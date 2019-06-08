@@ -43,7 +43,7 @@ export async function GetFirestore (){
               resolve(data);
             });
         } catch (e) {
-          reject({ data:null});
+          reject({ data:[]});
         }
     });
   }
@@ -67,7 +67,7 @@ export async function GetFirestore (){
             resolve(data);
           });
       } catch (e) {
-            reject({ data:null});
+            reject({ data:[]});
     }
     });
   }
