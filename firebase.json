@@ -8,10 +8,6 @@
     "public": "dist/public",
     "rewrites": [
       {
-        "source": "/about",
-        "function": "about"
-      },
-      {
         "source": "**/**",
         "function": "index"
       }

@@ -1,8 +1,7 @@
 // ./pages/_document.js
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import Navs from '../components/Navs';
-import {Container } from 'react-bootstrap';
-import {GetDatabase,GetDbAtOn} from '../lib/service';
+ //import Navs from '../components/Navs';
+// import {GetDatabase,GetDbAtOn} from '../lib/service';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -31,19 +30,11 @@ class MyDocument extends Document {
                     <meta name="msapplication-TileColor" content="#ffffff" />
                     <meta name="msapplication-TileImage" content="/static/favicon/ms-icon-144x144.png" />
                     <meta name="theme-color" content="#ffffff" />
-                    <link
-                        rel="stylesheet"
-                        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                        crossOrigin="anonymous" 
-                    />
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous" />
         </Head>
         <body className="custom_class">
-            <Navs></Navs>
           <Main />
-          <Container>
-            <NextScript />
-        </Container>
+          <NextScript />
         </body>
       </Html>
     );

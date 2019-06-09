@@ -2,9 +2,9 @@
 // src/app/pages/Index.js
 import React, {Component} from 'react';
 import DataList from '../components/DataList';
+import Navs from '../components/Navs';
 import {GetDatabase,GetDbAtOn} from '../lib/service';
-import { Jumbotron} from 'react-bootstrap';
-
+import { Jumbotron } from 'react-bootstrap';
 import 'firebase/database';
 
 class index extends Component {
@@ -27,7 +27,7 @@ class index extends Component {
       data:data
     })
   }
-  async componentWillUnmount(){
+  async componentDidMount(){
     let that=this;
     await GetDbAtOn(cb=>{
       that.GetChangeState(cb);
@@ -35,11 +35,12 @@ class index extends Component {
   }
 
   render(){
-    return(
-             <Jumbotron>
+    return(<div>
+       <Navs></Navs>
+      <Jumbotron>
         <DataList data={this.state.data.length>0?this.state.data:this.props.data}></DataList>
         </Jumbotron>
-    )
+        </div>)
   }
 }
 export default index;
