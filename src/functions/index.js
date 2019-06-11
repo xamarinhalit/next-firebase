@@ -28,8 +28,8 @@
 const functions = require("firebase-functions")
 const next = require("next")
 // These relative paths will exist after compiling everything
-const index = require('./next/serverless/pages/index');
-const about = require('./next/serverless/pages/about');
+//const index = require('./next/serverless/pages/index');
+//const about = require('./next/serverless/pages/about');
 
 var dev = process.env.NODE_ENV !== "production"
 var app = next({ dev, conf: { distDir: "next" } })

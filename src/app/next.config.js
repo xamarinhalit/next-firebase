@@ -14,10 +14,10 @@ const withMDX = require('@next/mdx')()
 
 
 module.exports =withBabelMinify(withSass(withMDX({
-    target: "serverless",
+   // target: "serverless",
     distDir: "../../dist/functions/next",
     cssModules: true,
-    //cache_manifest: false,
+    cache_manifest: false,
     webpack: config =>{
       const env = Object.keys(process.env).reduce((acc, curr) => {
         acc[`process.env.${curr}`] = JSON.stringify(process.env[curr]);
