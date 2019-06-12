@@ -1,6 +1,10 @@
 // src/app/components/Nav.js
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 import React, { Component } from 'react';
+
+import { Nav_Expanded,Auth_User_Login} from './../lib/redux/actions';
+import { connect} from 'react-redux';
+
 import { AuthLogin } from './../lib/firestore';
 // Next.js has a nice router we'll use
 import 'firebase/auth';
@@ -9,29 +13,26 @@ import 'firebase/auth';
 class Navs extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      User: { given_name: "Misafir" },
-      isNavExpanded: false
-    }
     this.onClick=this.onClick.bind(this);
     this.setIsNavExpanded=this.setIsNavExpanded.bind(this);
   }
   onClick() {
     let that = this;
     AuthLogin().then(user => {
-      that.setState({
-        User: { ...user.additionalUserInfo.profile }
-      })
+      that.props.Auth_User_Login(
+        { ...user.additionalUserInfo.profile }
+      )
     })
+  
   }
   setIsNavExpanded (isNavExpanded){
-    this.setState({ isNavExpanded: isNavExpanded });
+    this.props.Nav_Expanded(isNavExpanded);
   }
 
   render() {
     return (<div ref={node => this.node = node}><Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">Next Js & Firebase</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" collapseonselect="true" onToggle={this.setIsNavExpanded} expanded={this.state.isNavExpanded ? "true" : "false"} />
+      <Navbar.Toggle aria-controls="basic-navbar-nav" collapseonselect="true" onToggle={this.setIsNavExpanded} expanded={this.props.isNavExpanded ? "true" : "false"} />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Anasayfa</Nav.Link>
@@ -45,9 +46,9 @@ class Navs extends Component {
           </Form>
         </Nav>
         <Navbar.Text>
-          {(this.state.User.id) ? (
+          {(this.props.User.id) ? (
             <Nav.Link onClick={this.onClick}>
-              <img src={this.state.User.picture} height="32" width="32"></img> Merhaba Kullanıcı : <b >{this.state.User.given_name}</b>
+              <img src={this.props.User.picture} height="32" width="32"></img> Merhaba Kullanıcı : <b >{this.props.User.given_name}</b>
             </Nav.Link>) :
             (<Nav.Link onClick={this.onClick}>
               Merhaba <b >Misafir  </b>
@@ -58,4 +59,12 @@ class Navs extends Component {
     </Navbar></div>);
   }
 }
-export default Navs;
+const mapDispatchToProps = { Nav_Expanded,Auth_User_Login }
+function mapStateToProps (state) {
+  const { isNavExpanded,User} = state
+  return { isNavExpanded,User }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navs)

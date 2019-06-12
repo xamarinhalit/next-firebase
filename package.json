@@ -32,6 +32,9 @@
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "react-pose": "^4.0.8",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
