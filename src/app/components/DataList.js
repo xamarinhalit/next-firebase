@@ -44,7 +44,7 @@ class DataList extends Component {
             </Child>
           )) : null}
           {this.props.Selected!=null?(<Child key={this.props.Result.length?1:this.props.Result.length} className="list-group-item" >
-         <iframe width="1280" height="720" src={this.props.Selected.yurl} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}></iframe>
+         <iframe style={{width:87 +"vw",height:87+"vh"}} src={this.props.Selected.yurl} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}></iframe>
         </Child>):<div><h5 align="center" >Url Yok</h5></div>}
         </Parent>):null}
       </PoseGroup>)
