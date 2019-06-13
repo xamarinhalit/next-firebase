@@ -2,7 +2,7 @@
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 import React, { Component } from 'react';
 
-import { Nav_Expanded,Auth_User_Login} from './../lib/redux/actions';
+import { Nav_Expanded,Auth_User_Login,Data_Filter} from './../lib/redux/actions';
 import { connect} from 'react-redux';
 
 import { AuthLogin } from './../lib/firestore';
@@ -15,6 +15,10 @@ class Navs extends Component {
     super(props);
     this.onClick=this.onClick.bind(this);
     this.setIsNavExpanded=this.setIsNavExpanded.bind(this);
+    this.SearchData=this.SearchData.bind(this);
+    this.state={
+      search:""
+    }
   }
   onClick() {
     let that = this;
@@ -28,7 +32,12 @@ class Navs extends Component {
   setIsNavExpanded (isNavExpanded){
     this.props.Nav_Expanded(isNavExpanded);
   }
-
+  SearchData(e){
+    this.setState({
+      search:e.currentTarget.value
+    });
+    this.props.Data_Filter(e.currentTarget.value);
+  }
   render() {
     return (<div ref={node => this.node = node}><Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">Next Js & Firebase</Navbar.Brand>
@@ -38,7 +47,7 @@ class Navs extends Component {
           <Nav.Link href="/">Anasayfa</Nav.Link>
           <Nav.Link href="/about"> Hakkında</Nav.Link>
           <Form inline>
-            <FormControl type="text" placeholder="Arama" className="mr-sm-2 ml-sm-2" >
+            <FormControl type="text" placeholder="Arama" className="mr-sm-2 ml-sm-2" onChange={this.SearchData} value={this.state.search}>
             </FormControl>
             <Nav.Link variant="outline-success">
               Arama
@@ -59,7 +68,7 @@ class Navs extends Component {
     </Navbar></div>);
   }
 }
-const mapDispatchToProps = { Nav_Expanded,Auth_User_Login }
+const mapDispatchToProps = { Nav_Expanded,Auth_User_Login,Data_Filter }
 function mapStateToProps (state) {
   const { isNavExpanded,User} = state
   return { isNavExpanded,User }

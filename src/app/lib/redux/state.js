@@ -3,5 +3,6 @@ export const InitialState = {
     Selected:null,
     IsServer:false,
     isNavExpanded:"false",
+    OldResult:[],
     User: { given_name: "Misafir" ,picture:null},
   }

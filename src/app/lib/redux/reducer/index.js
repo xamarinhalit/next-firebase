@@ -7,10 +7,12 @@ import {InitialState} from '../state';
       if(action.IsServer)
         return Object.assign({}, state, {
           Result: action.Result,
+          OldResult:action.Result,
         })
       case actionTypes.FIREBASE_ON:
       return Object.assign({}, state, {
         Result: action.Result,
+        OldResult:action.Result,
       })
       case actionTypes.DATALIST_SELECTED:
       return Object.assign({}, state, {
@@ -24,7 +26,11 @@ import {InitialState} from '../state';
         return Object.assign({}, state, {
           User: action.User,
         })
-      
+        case actionTypes.DATA_FILTER:
+        let rs= state.OldResult.filter(function(val){return val.name.includes(action.filter)});
+        return Object.assign({}, state, {
+          Result:rs,
+        })
       default:
         return state
     }
