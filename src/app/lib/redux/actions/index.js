@@ -29,7 +29,7 @@ export const Auth_User_Signout = (user) => {
 
   return { type: actionTypes.AUTH_USER_SIGNOUT, User: user };
 }
-export const Data_Filter = (filter) => {
+export const Data_Filter = (payload) => {
 
-  return { type: actionTypes.DATA_FILTER, filter: filter };
+  return { type: actionTypes.DATA_FILTER, payload };
 }

@@ -31,10 +31,18 @@ import {InitialState} from '../state';
           User: state.DefaultUser
         })
         case actionTypes.DATA_FILTER:
-        let rs= state.OldResult.filter(function(val){return val.name.includes(action.filter)});
-        return Object.assign({}, state, {
-          Result:rs,
-        })
+        if(action.payload.path=="/about"){
+          let rs= state.OldMapList.filter(function(val){return val.name.includes(action.payload.data)});
+          return Object.assign({}, state, {
+            MapList:rs,
+          })
+        }else{
+          let rs= state.OldResult.filter(function(val){return val.name.includes(action.payload.data)});
+          return Object.assign({}, state, {
+            Result:rs,
+          })
+        }
+        
       default:
         return state
     }

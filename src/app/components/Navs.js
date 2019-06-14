@@ -36,7 +36,7 @@ class Navs extends Component {
     this.setState({
       search:e.currentTarget.value
     });
-    this.props.Data_Filter(e.currentTarget.value);
+      this.props.Data_Filter({data:e.currentTarget.value,path:location.pathname});
   }
   render() {
     return (<div ref={node => this.node = node}><Navbar bg="light" expand="lg">
