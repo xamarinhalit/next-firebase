@@ -2,10 +2,10 @@
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 import React, { Component } from 'react';
 
-import { Nav_Expanded,Auth_User_Login,Data_Filter} from './../lib/redux/actions';
+import { Nav_Expanded,Auth_User_Login,Data_Filter,Auth_User_Signout} from './../lib/redux/actions';
 import { connect} from 'react-redux';
 
-import { AuthLogin } from './../lib/firestore';
+import { AuthLogin,AuthLogout } from './../lib/firestore';
 // Next.js has a nice router we'll use
 import 'firebase/auth';
 
@@ -13,21 +13,21 @@ import 'firebase/auth';
 class Navs extends Component {
   constructor(props) {
     super(props);
-    this.onClick=this.onClick.bind(this);
+    this.onLogin=this.onLogin.bind(this);
+    this.onLogout=this.onLogout.bind(this);
     this.setIsNavExpanded=this.setIsNavExpanded.bind(this);
     this.SearchData=this.SearchData.bind(this);
     this.state={
       search:""
     }
   }
-  onClick() {
+  onLogin() {
     let that = this;
-    AuthLogin().then(user => {
-      that.props.Auth_User_Login(
-        { ...user.additionalUserInfo.profile }
-      )
-    })
-  
+    AuthLogin().then(user =>   that.props.Auth_User_Login({ ...user.additionalUserInfo.profile }));
+  }
+  onLogout() {
+    let that = this;
+    AuthLogout().then(() => that.props.Auth_User_Signout());
   }
   setIsNavExpanded (isNavExpanded){
     this.props.Nav_Expanded(isNavExpanded);
@@ -56,11 +56,21 @@ class Navs extends Component {
         </Nav>
         <Navbar.Text>
           {(this.props.User.id) ? (
-            <Nav.Link onClick={this.onClick}>
+            <Nav.Link onClick={this.onLogout}>
               <img src={this.props.User.picture} height="32" width="32"></img> Merhaba Kullanıcı : <b >{this.props.User.given_name}</b>
             </Nav.Link>) :
-            (<Nav.Link onClick={this.onClick}>
+            (<Nav.Link onClick={this.onLogin}>
               Merhaba <b >Misafir  </b>
+            </Nav.Link>)
+          }
+        </Navbar.Text>
+        <Navbar.Text>
+          {(this.props.User.id) ? (
+            <Nav.Link onClick={this.onLogout}>
+              Çıkış
+            </Nav.Link>) :
+            (<Nav.Link onClick={this.onLogin}>
+              Giriş yap
             </Nav.Link>)
           }
         </Navbar.Text>
@@ -68,7 +78,7 @@ class Navs extends Component {
     </Navbar></div>);
   }
 }
-const mapDispatchToProps = { Nav_Expanded,Auth_User_Login,Data_Filter }
+const mapDispatchToProps = { Nav_Expanded,Auth_User_Login,Data_Filter,Auth_User_Signout }
 function mapStateToProps (state) {
   const { isNavExpanded,User} = state
   return { isNavExpanded,User }

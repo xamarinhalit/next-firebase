@@ -25,6 +25,10 @@ export const Auth_User_Login = (user) => {
 
 }
 
+export const Auth_User_Signout = (user) => {
+
+  return { type: actionTypes.AUTH_USER_SIGNOUT, User: user };
+}
 export const Data_Filter = (filter) => {
 
   return { type: actionTypes.DATA_FILTER, filter: filter };

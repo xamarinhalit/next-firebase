@@ -22,7 +22,9 @@ try {
 return firebase;
 }
 
-
+export const AuthLogout = ()=>{
+  return firebase.auth().signOut();
+}
 //import 'firebase/auth';
 export const AuthLogin = ()=>{
   LoadDb();

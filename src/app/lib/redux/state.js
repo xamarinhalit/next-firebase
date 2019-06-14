@@ -5,4 +5,5 @@ export const InitialState = {
     isNavExpanded:"false",
     OldResult:[],
     User: { given_name: "Misafir" ,picture:null},
+    DefaultUser:{ given_name: "Misafir" ,picture:null}
   }

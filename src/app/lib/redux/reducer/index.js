@@ -26,6 +26,10 @@ import {InitialState} from '../state';
         return Object.assign({}, state, {
           User: action.User,
         })
+        case actionTypes.AUTH_USER_SIGNOUT:
+        return Object.assign({}, state, {
+          User: state.DefaultUser
+        })
         case actionTypes.DATA_FILTER:
         let rs= state.OldResult.filter(function(val){return val.name.includes(action.filter)});
         return Object.assign({}, state, {
