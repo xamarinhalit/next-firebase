@@ -12,7 +12,10 @@ class index extends Component {
     return(<div>
        <Navs></Navs>
       <Jumbotron>
+        <h1>Realtime Database</h1>
         <DataList ></DataList>
+        <h3 style={{display:'none'}}>yapım aşaması</h3>
+        <h2 style={{display:'none'}}>yapılacaklar</h2>
         </Jumbotron>
         </div>)
   }

@@ -35,8 +35,9 @@ var dev = process.env.NODE_ENV !== "production"
 var app = next({ dev, conf: { distDir: "next" } })
 var handle = app.getRequestHandler()
 
+
 exports.index = functions.https.onRequest((req, res) => {
  // console.log("File: " + req.originalUrl) // log the page.js file that is being requested
- res.set( "Cache-Control", "max-age=3600, s-maxage=31536000");
+ res.set( "Cache-Control", "public,max-age=43200, s-maxage=43200");
   return app.prepare().then(() => handle(req, res))
 })

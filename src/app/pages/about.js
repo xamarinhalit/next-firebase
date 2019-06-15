@@ -1,25 +1,18 @@
 // src/app/pages/About.js
 import { Jumbotron,Row,Tab,Col,Nav} from 'react-bootstrap';
+
 import React, { Component } from 'react'
 import Navs from '../components/Navs';
-import './../components/css/nav.scss';
+
 import { connect } from 'react-redux';
-import {DataList_Selected} from '../lib/redux/actions'
 
  class about extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-    
-    }
-  }
-
   render() {
     return (<div>
        <Navs></Navs>
-      <Jumbotron>
+      <Jumbotron >
         <h2>Firestore ve Realtime Database Data Çekme</h2>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="1">
+        <Tab.Container id="left-tabs-example" defaultActiveKey="1" >
           <Row >
             <Col sm={3}>
             <Nav  variant="pills" className="flex-column">

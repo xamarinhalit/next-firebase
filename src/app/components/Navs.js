@@ -44,14 +44,12 @@ class Navs extends Component {
       <Navbar.Toggle aria-controls="basic-navbar-nav" collapseonselect="true" onToggle={this.setIsNavExpanded} expanded={this.props.isNavExpanded ? "true" : "false"} />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/">Anasayfa</Nav.Link>
-          <Nav.Link href="/about"> Hakkında</Nav.Link>
+          <Nav.Link href="/" >Anasayfa</Nav.Link>
+          <Nav.Link href="/about"  > Hakkında</Nav.Link>
           <Form inline>
             <FormControl type="text" placeholder="Arama" className="mr-sm-2 ml-sm-2" onChange={this.SearchData} value={this.state.search}>
             </FormControl>
-            <Nav.Link variant="outline-success">
-              Arama
-        </Nav.Link>
+          
           </Form>
         </Nav>
         <Navbar.Text>
