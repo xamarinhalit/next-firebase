@@ -23,7 +23,13 @@ return firebase;
 }
 
 export const AuthLogout = ()=>{
-  return firebase.auth().signOut();
+  try {
+    return firebase.auth().signOut();  
+  } catch (e) {
+    LoadDb();
+    return firebase.auth().signOut();  
+  }
+  
 }
 //import 'firebase/auth';
 export const AuthLogin = ()=>{
