@@ -13,14 +13,20 @@ class MyApp extends App {
     super(props);
     this.persistor = persistStore(props.reduxStore)
   }
+  componentDidMount(){
+    // make a stylesheet link
+    var myCSS = document.createElement( "link" );
+    myCSS.rel = "stylesheet";
+    myCSS.href = "/static/css/bootstrap.css";
+    // insert it at the end of the head in a legacy-friendly manner
+    document.head.insertBefore( myCSS, document.head.childNodes[ document.head.childNodes.length - 1 ].nextSibling );
+  }
   render () {
     const { Component, pageProps, reduxStore } = this.props
     return (
       <Container>
         <Head>
           <title>Next Js Merhaba</title>
-          <link rel="preload" href="/static/css/bootstrap.css" as="style" onLoad="this.onload=null;this.rel='stylesheet'" />
-          <noscript><link rel="stylesheet" href="/static/css/bootstrap.css"/></noscript>
         </Head>
         <Provider store={reduxStore}>
         <PersistGate
