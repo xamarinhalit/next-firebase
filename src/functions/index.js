@@ -33,11 +33,33 @@ const next = require("next")
 
 var dev = process.env.NODE_ENV !== "production"
 var app = next({ dev, conf: { distDir: "next" } })
-var handle = app.getRequestHandler()
 
+// var express = require('express')
+// var appex = express();
+
+var handle = app.getRequestHandler()
+var sm = require('sitemap');
+_sitemap = sm.createSitemap ({
+  hostname: 'https://next-f0.firebaseapp.com',
+  cacheTime: 7200,        // 600 sec - cache purge period
+  urls: [
+    { url: '/index',  changefreq: 'hourly', priority: 0.3 },
+    { url: '/about',  changefreq: 'hourly',  priority: 0.7 },
+  ]
+});
+exports.sitemap=functions.https.onRequest((req, res) => {
+  res.header('Content-Type', 'text/xml');
+  res.send(_sitemap.toString());
+  return app.prepare().then(() => handle(req, res))
+});
 
 exports.index = functions.https.onRequest((req, res) => {
  // console.log("File: " + req.originalUrl) // log the page.js file that is being requested
  res.set( "Cache-Control", "public,max-age=43200, s-maxage=43200");
+ return app.prepare().then(() => handle(req, res))
+});
+exports.robots = functions.https.onRequest((req, res) => {
+     res.type('text/plain');
+    res.send('User-agent: *\nDisallow: /');
   return app.prepare().then(() => handle(req, res))
-})
+ });

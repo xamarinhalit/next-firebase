@@ -13,13 +13,24 @@ class MyApp extends App {
     super(props);
     this.persistor = persistStore(props.reduxStore)
   }
-  componentDidMount(){
+  async componentDidMount(){
     // make a stylesheet link
-    var myCSS = document.createElement( "link" );
-    myCSS.rel = "stylesheet";
-    myCSS.href = "/static/css/bootstrap.css";
+   
+   
     // insert it at the end of the head in a legacy-friendly manner
-    document.head.insertBefore( myCSS, document.head.childNodes[ document.head.childNodes.length - 1 ].nextSibling );
+    await new Promise((resolve,reject)=>{
+      var myCSS = document.createElement( "link" );
+      myCSS.rel = "stylesheet";
+      myCSS.href = "/static/css/bootstrap.css";
+      document.head.insertBefore( myCSS, document.head.childNodes[ document.head.childNodes.length - 1 ].nextSibling ); 
+     var myMani =document.createElement("link");
+     myMani.rel="manifest";
+     myMani.href="/static/favicon/manifest.json";
+     document.head.insertBefore( myMani, document.head.childNodes[ document.head.childNodes.length - 1 ].nextSibling );
+      resolve();
+    })
+
+    
   }
   render () {
     const { Component, pageProps, reduxStore } = this.props

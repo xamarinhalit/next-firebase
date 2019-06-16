@@ -40,12 +40,12 @@ class Navs extends Component {
   }
   render() {
     return (<div ref={node => this.node = node}><Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">Next Js & Firebase</Navbar.Brand>
+      <Navbar.Brand href="/" rel="nofollow">Next Js & Firebase</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" collapseonselect="true" onToggle={this.setIsNavExpanded} expanded={this.props.isNavExpanded ? "true" : "false"} />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/" >Anasayfa</Nav.Link>
-          <Nav.Link href="/about"  > Hakkında</Nav.Link>
+          <Nav.Link href="/" rel="nofollow">Anasayfa</Nav.Link>
+          <Nav.Link href="/about"  rel="nofollow"> Hakkında</Nav.Link>
           <Form inline>
             <FormControl type="text" placeholder="Arama" className="mr-sm-2 ml-sm-2" onChange={this.SearchData} value={this.state.search}>
             </FormControl>
@@ -54,20 +54,20 @@ class Navs extends Component {
         </Nav>
         <Navbar.Text>
           {(this.props.User.id) ? (
-            <Nav.Link onClick={this.onLogout}>
+            <Nav.Link onClick={this.onLogout} rel="nofollow">
               <img src={this.props.User.picture} height="32" width="32"></img> Merhaba Kullanıcı : <b >{this.props.User.given_name}</b>
             </Nav.Link>) :
-            (<Nav.Link onClick={this.onLogin}>
+            (<Nav.Link onClick={this.onLogin} rel="nofollow">
               Merhaba <b >Misafir  </b>
             </Nav.Link>)
           }
         </Navbar.Text>
         <Navbar.Text>
           {(this.props.User.id) ? (
-            <Nav.Link onClick={this.onLogout}>
+            <Nav.Link onClick={this.onLogout} rel="nofollow">
               Çıkış
             </Nav.Link>) :
-            (<Nav.Link onClick={this.onLogin}>
+            (<Nav.Link onClick={this.onLogin} rel="nofollow">
               Giriş yap
             </Nav.Link>)
           }

@@ -13,9 +13,12 @@ class Index extends React.Component {
 
   async componentDidMount () {
     let that =this;
-     await GetDbAtOn(cb=>{
+    await new Promise(async (re,rj)=>{
+      await GetDbAtOn(cb=>{
         that.props.clientRenderOn(cb);
       });
+    })
+     
   }
   render () {
     return <App />

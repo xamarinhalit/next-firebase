@@ -1,6 +1,6 @@
 // src/app/next.config.js
 const webpack = require('webpack');
-const withSass = require('@zeit/next-sass');
+//const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
 const fs = require('fs');
 const dotenv = require('dotenv');

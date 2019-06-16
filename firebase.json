@@ -8,6 +8,14 @@
     "public": "dist/public",
     "rewrites": [
       {
+        "source": "/sitemap.xml",
+        "function": "sitemap"
+      },
+      {
+        "source": "/robots.txt",
+        "function": "robots"
+      },
+      {
         "source": "**/**",
         "function": "index"
       }
