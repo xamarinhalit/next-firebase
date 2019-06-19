@@ -1,31 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import { serverRenderOnce,clientRenderOn } from '../lib/redux/actions'
 import App from '../components';
-import { GetDbAtOn} from '../lib/service'
-
 class Index extends React.Component {
-  static getInitialProps ({ reduxStore, req }) {
+  static getInitialProps ({ reduxStore, req ,dispatch}) {
+    this.boundActionCreators = bindActionCreators({ serverRenderOnce,clientRenderOn }, dispatch)
     const isServer = !!req
     reduxStore.dispatch(serverRenderOnce(isServer))
     return {}
   }
 
-  async componentDidMount () {
-    let that =this;
-    await new Promise(async (re,rj)=>{
-      await GetDbAtOn(cb=>{
-        that.props.clientRenderOn(cb);
-      });
-    })
-     
+   componentDidMount () {
+     let { dispatch ,mongoose} = this.props
+     clientRenderOn(cb=>{
+       dispatch(cb);
+     });
   }
   render () {
-    return <App />
+    return <App {...this.props.boundActionCreators}/>
   }
 }
-const mapDispatchToProps = { serverRenderOnce,clientRenderOn }
+
 export default connect(
-  null,
-  mapDispatchToProps
+  null
 )(Index)

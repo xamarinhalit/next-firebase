@@ -1,6 +1,8 @@
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { persistReducer } from 'redux-persist'
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
+
 import storage from 'redux-persist/lib/storage';
 
 import {reducer} from '../reducer';
@@ -17,6 +19,6 @@ export function initializeStore (initialState = InitialState) {
   return createStore(
     persistedReducer,
     initialState,
-    composeWithDevTools(applyMiddleware())
+    composeWithDevTools(applyMiddleware(thunk))
   )
 }
