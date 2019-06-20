@@ -3,9 +3,11 @@ import Head from 'next/head';
 import React from 'react'
 import withReduxStore from '../lib/redux'
 import { Provider } from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+
 // import  "./../static/css/bootstrap.css";
 
 class MyApp extends App {
@@ -14,9 +16,7 @@ class MyApp extends App {
     this.persistor = persistStore(props.reduxStore)
   }
   async componentDidMount(){
-    // make a stylesheet link
-   
-   
+  
     // insert it at the end of the head in a legacy-friendly manner
     await new Promise((resolve,reject)=>{
       var myCSS = document.createElement( "link" );
@@ -35,7 +35,7 @@ class MyApp extends App {
   render () {
     const { Component, pageProps, reduxStore } = this.props
     return (
-      <Container>
+      <Container {...this.boundActionCreators}>
         <Head>
           <title>Next Js Merhaba</title>
         </Head>

@@ -1,5 +1,6 @@
 import { actionTypes} from '../constants';
 import {InitialState} from '../state';
+
   // REDUCERS
   export const reducer = (state = InitialState, action) => {
     switch (action.type) {
@@ -29,6 +30,20 @@ import {InitialState} from '../state';
         case actionTypes.AUTH_USER_SIGNOUT:
         return Object.assign({}, state, {
           User: state.DefaultUser
+        })
+        case actionTypes.DATA_LIST_ADD:
+       
+        // state.Result.push({
+        //   name:"deneme"+state.Result.length,
+        //   id:state.Result.length+1
+        // });
+        return Object.assign({}, state, {
+            ...state,
+            data:{...action.payload}
+        })
+        case actionTypes.ON_AUTH_STATE_CHANGED:
+        return Object.assign({}, state, {
+         IsAuth:action.payload
         })
         case actionTypes.DATA_FILTER:
         if(action.payload.path=="/about"){

@@ -1,5 +1,5 @@
 
-import firebase from 'firebase/app';
+import firebase, { auth } from 'firebase/app';
 //import 'firebase/firestore';
 export  default async function LoadDb() {
 
@@ -31,6 +31,7 @@ export const AuthLogout = ()=>{
   }
   
 }
+
 //import 'firebase/auth';
 export const AuthLogin = ()=>{
   LoadDb();
@@ -56,4 +57,15 @@ export const AuthLogin = ()=>{
     
   // });
   return firebase.auth().signInWithPopup(provider);
+}
+
+export const onAuthStateChanged = (cb)=>{
+  LoadDb();
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      cb(true);
+    }else{
+      cb(false);
+    }
+  });
 }

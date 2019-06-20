@@ -1,18 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { serverRenderOnce,clientRenderOn } from '../lib/redux/actions'
+import { serverRenderOnce,clientRenderOn,On_Auth_State_Changed } from '../lib/redux/actions'
 import App from '../components';
 class Index extends React.Component {
   static getInitialProps ({ reduxStore, req ,dispatch}) {
-    this.boundActionCreators = bindActionCreators({ serverRenderOnce,clientRenderOn }, dispatch)
+    this.boundActionCreators = bindActionCreators({ serverRenderOnce,clientRenderOn,On_Auth_State_Changed }, dispatch)
     const isServer = !!req
     reduxStore.dispatch(serverRenderOnce(isServer))
+  
     return {}
   }
 
-   componentDidMount () {
-     let { dispatch ,mongoose} = this.props
+   async componentDidMount () {
+     let { dispatch } = this.props;
+     On_Auth_State_Changed(u=>{
+      dispatch(u);
+    });
      clientRenderOn(cb=>{
        dispatch(cb);
      });
