@@ -1,5 +1,8 @@
 import { actionTypes} from '../constants';
 import {InitialState} from '../state';
+import {Data_List_Add} from '../../service';
+
+
 
   // REDUCERS
   export const reducer = (state = InitialState, action) => {
@@ -31,16 +34,26 @@ import {InitialState} from '../state';
         return Object.assign({}, state, {
           User: state.DefaultUser
         })
+        // case actionTypes.DATA_LIST_ADD_SUCCESS:
+        // return Object.assign({}, state, {
+        //   IsAddSuccess:action.payload
+        // })
         case actionTypes.DATA_LIST_ADD:
+        if(state.IsAuth && state.User.email!=undefined && state.User.email!=null){
+          try {
+            Data_List_Add({...action.payload,User:{...state.User}}).then(data=>{
+             // reducer(state, { type: actionTypes.DATA_LIST_ADD_SUCCESS, payload:true })
+            }).catch(e=>{
+              //reducer(state, { type: actionTypes.DATA_LIST_ADD_SUCCESS, payload:false })
+            });
+            
+          } catch (error) {
+            //reducer(state, { type: actionTypes.DATA_LIST_ADD_SUCCESS, payload:false })
+          }
+        }
+        
+        return Object.assign({}, state);    
        
-        // state.Result.push({
-        //   name:"deneme"+state.Result.length,
-        //   id:state.Result.length+1
-        // });
-        return Object.assign({}, state, {
-            ...state,
-            data:{...action.payload}
-        })
         case actionTypes.ON_AUTH_STATE_CHANGED:
         return Object.assign({}, state, {
          IsAuth:action.payload

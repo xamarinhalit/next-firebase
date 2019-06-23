@@ -1,5 +1,32 @@
 
-import firebase, { auth } from 'firebase/app';
+import firebase from 'firebase/app';
+
+export const GetDbUrl=async (path)=>{
+  return new Promise((resolve,reject)=>{
+    const config = {
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      databaseURL: process.env.FIREBASE_DATABASE_URL,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.FIREBASE_SENDER_ID,
+    };
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      if(idToken!=null && idToken!=undefined){
+        let url =config.databaseURL+"?access_token="+idToken;
+        
+        resolve(url);
+      }
+      else{
+        reject(null);
+      }
+    }).catch(function(error) {
+      reject(null);
+    });
+  });
+  
+}
+
 //import 'firebase/firestore';
 export  default async function LoadDb() {
 
@@ -12,13 +39,12 @@ const config = {
   messagingSenderId: process.env.FIREBASE_SENDER_ID,
 };
 try {
-  if(firebase.app.length!=undefined && firebase.app.length>0)
-  await firebase.initializeApp(config);
+  if(firebase.app.length!=undefined && firebase.app.length>0){
+    await firebase.initializeApp(config);
+  }
 } catch (e) {
   
 }
-// if (!firebase.apps.length) {
-// }
 return firebase;
 }
 
@@ -34,38 +60,37 @@ export const AuthLogout = ()=>{
 
 //import 'firebase/auth';
 export const AuthLogin = ()=>{
-  LoadDb();
-  var provider = new firebase.auth.GoogleAuthProvider();
+  let provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
-  // firebase.auth().signInWithPopup(provider).then(function(result) {
-  //   // This gives you a Google Access Token. You can use it to access the Google API.
-  //   var token = result.credential.accessToken;
-  //   // The signed-in user info.
-  //   var user = result.user;
-  //   // ...
-  //   console.log(result);
-  // }).catch(function(error) {
-  //   // Handle Errors here.
-  //   var errorCode = error.code;
-  //   var errorMessage = error.message;
-  //   // The email of the user's account used.
-  //   var email = error.email;
-  //   // The firebase.auth.AuthCredential type that was used.
-  //   var credential = error.credential;
-  //   // ...
-  //   console.log(error);
-    
-  // });
-  return firebase.auth().signInWithPopup(provider);
+  try {
+    return firebase.auth().signInWithPopup(provider);
+  } catch (error) {
+    LoadDb();
+    return firebase.auth().signInWithPopup(provider);
+  }
+  
+  
 }
 
 export const onAuthStateChanged = (cb)=>{
-  LoadDb();
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      cb(true);
-    }else{
-      cb(false);
-    }
-  });
+  try {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          cb(true);
+        }else{
+          cb(false);
+        }
+      });
+    
+  } catch (error) {
+    LoadDb();
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        cb(true);
+      }else{
+        cb(false);
+      }
+    });
+  }
+  
 }

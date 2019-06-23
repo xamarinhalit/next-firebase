@@ -1,12 +1,12 @@
-import LoadDb from "../firestore";
+import LoadDb,{GetDbUrl} from "../firestore";
+
 import uuid from 'uuid';
 
 
-
 export async function GetFirestore (){
-    let firebase =await LoadDb();
-    return await new Promise(async (resolve,reject)=>{
-      try {
+  return await new Promise(async (resolve,reject)=>{
+    try {
+            let firebase =await LoadDb();
             firebase.firestore().collection("next-db")
             .get()
             .then((snapshot)=>{
@@ -26,10 +26,11 @@ export async function GetFirestore (){
         }
     });
   }
-  export async function GetDatabase (){
-    let firebase =await LoadDb();
+export async function GetDatabase (){
     return await new Promise(async (resolve,reject)=>{
       try {
+      
+        let firebase =await LoadDb();
         firebase.database().ref("/next-db").once('value', function(snapshot) {
               let data= [];
               let _key=0;
@@ -48,25 +49,76 @@ export async function GetFirestore (){
         }
     });
   }
-  export const Data_List_Add =async ()=>{
-   
-    let firebase =await LoadDb();
-    return await new Promise((resolve,reject)=>{
-      try {
-        var postData ={};
-        var ref=firebase.database().ref("/next-db");
-        let _uid=uuid();
-        postData = {
+  export const Data_List_Add =async (data)=>{
+    let {name,detail,yurl,User}=data;
+    if(name!=undefined && (detail!=undefined || yurl!=undefined) && User!=undefined && User!=null){
+      return await new Promise(async (resolve,reject)=>{
+        try {
+          let saveDAta ={};
+          let PostUser={};
+          let firebase=await LoadDb();
+          GetDbUrl("/next-db").then(url=>{
+            if(url!=null){
+              let ref=firebase.database().ref("/next-db");
+              let refpost=firebase.database().ref("/next-postuser");
+              let _uid=uuid();
+              saveDAta = {
+                  id:_uid,
+                  name,detail,yurl,
+                  picture: User.picture
+                  };
+                  PostUser= {
+                    postid:saveDAta.id,
+                    name:User.name,
+                    email:User.email,
+                    given_name:User.given_name,
+                    picture: User.picture
+                  };
+                  ref.push().set(saveDAta);
+                  refpost.push().set(PostUser);
+                }
+                resolve(true);
+          }).catch(err=>{
+            reject(null);
+          });
+         
+          } catch (e) {
+            reject(e);
+          }
+        });
+    }
+  }
+  export const Data_List_Remove =async (data)=>{
+    let {name,detail,yurl,User}=data;
+    if(name!=undefined && (detail!=undefined || yurl!=undefined) && User!=undefined && User!=null){
+      return await new Promise(async (resolve,reject)=>{
+        try {
+          let saveDAta ={};
+          let PostUser={};
+          let firebase=await LoadDb();
+          let ref=firebase.database().ref("/next-db");
+          let refpost=firebase.database().ref("/next-postuser");
+          let _uid=uuid();
+          saveDAta = {
               id:_uid,
-              name: "halit3"
-            };
-            // Get a key for a new Post.
-              
-          resolve(ref.push().set(postData));
-        } catch (e) {
-              reject(e);
-      }
-      });
+              name,detail,yurl,
+              };
+              PostUser= {
+                postid:saveDAta.id,
+                name:User.name,
+                email:User.email,
+                given_name:User.given_name,
+                picture: User.picture
+              };
+              ref.push().set(saveDAta);
+              refpost.push().set(PostUser);
+            
+            resolve(null);
+          } catch (e) {
+            reject(e);
+          }
+        });
+    }
   }
   export async function GetDbAtOn(cb)
   {
@@ -80,7 +132,6 @@ export async function GetFirestore (){
               _key++;
               data.push({
                 ...snap.val(),
-                //id:uuid()
                 id:_key
               })
             });

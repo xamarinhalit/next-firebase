@@ -1,9 +1,10 @@
 export const InitialState = {
-    Result: [],
     Selected:null,
     IsServer:false,
     IsAuth:false,
+    IsAddSuccess:true,
     isNavExpanded:"false",
+    Result: [],
     OldResult:[],
     User: { given_name: "Misafir" ,picture:null},
     DefaultUser:{ given_name: "Misafir" ,picture:null},

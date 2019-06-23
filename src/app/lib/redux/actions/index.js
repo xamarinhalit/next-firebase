@@ -1,8 +1,8 @@
 import { actionTypes } from '../constants';
 import { GetDbAtOn} from '../../service';
 import { onAuthStateChanged } from '../../firestore';
-import uuidv4 from 'uuid/v4';
-import {Data_List_Add} from '../../service';
+
+
 // ACTIONS
 export const serverRenderOnce = (IsServer) => {
   if (IsServer) {
@@ -38,14 +38,13 @@ export const Data_Filter = (payload) => {
   return { type: actionTypes.DATA_FILTER, payload };
 }
 export const DataList_Add = (payload) => {
-
-  let data =Data_List_Add();
-  console.log(data);
-  return { type: actionTypes.DATA_LIST_ADD, payload:data };
+  return { type: actionTypes.DATA_LIST_ADD, payload:payload };
 }
+// export const DataList_Add_Success = (payload) => {
+//   return { type: actionTypes.DATA_LIST_ADD_SUCCESS, payload:payload };
+// }
 export const On_Auth_State_Changed = (dispatch) => {
   onAuthStateChanged(u=>{
-    console.log("IsAuth->> ",u);
     dispatch({ type: actionTypes.ON_AUTH_STATE_CHANGED,payload:u });
   })
   
