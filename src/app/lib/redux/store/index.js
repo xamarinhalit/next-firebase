@@ -5,13 +5,13 @@ import thunk from 'redux-thunk';
 
 import storage from 'redux-persist/lib/storage';
 
-import {reducer} from '../reducer';
+import reducer from '../reducer';
 import {InitialState} from '../state';
 
 const persistConfig = {
   key: 'primary',
   storage,
-  whitelist: ['Result','User'] // place to select which state you want to persist
+  whitelist: ['blog','payment'] // place to select which state you want to persist
 }
 const persistedReducer = persistReducer(persistConfig, reducer)
 

@@ -38,7 +38,8 @@ class Navs extends Component {
     });
       this.props.Data_Filter({data:e.currentTarget.value,path:location.pathname});
   }
-  render() {
+    render() {
+        let { User } = this.props;
     return (<div ref={node => this.node = node}><Navbar bg="light" expand="lg">
       <Navbar.Brand href="/" rel="nofollow">Next Js & Firebase</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" collapseonselect="true" onToggle={this.setIsNavExpanded} expanded={this.props.isNavExpanded ? "true" : "false"} />
@@ -53,9 +54,9 @@ class Navs extends Component {
           </Form>
         </Nav>
         <Navbar.Text>
-          {(this.props.User.id) ? (
+          {(User.id) ? (
             <Nav.Link onClick={this.onLogout} rel="nofollow">
-              <img src={this.props.User.picture} height="32" width="32"></img> Merhaba Kullanıcı : <b >{this.props.User.given_name}</b>
+              <img src={User.picture} height="32" width="32"></img> Merhaba Kullanıcı : <b >{this.props.User.given_name}</b>
             </Nav.Link>) :
             (<Nav.Link onClick={this.onLogin} rel="nofollow">
               Merhaba <b >Misafir  </b>
@@ -63,7 +64,7 @@ class Navs extends Component {
           }
         </Navbar.Text>
         <Navbar.Text>
-          {(this.props.User.id) ? (
+          {(User.id) ? (
             <Nav.Link onClick={this.onLogout} rel="nofollow">
               Çıkış
             </Nav.Link>) :
@@ -77,8 +78,8 @@ class Navs extends Component {
   }
 }
 const mapDispatchToProps = { Nav_Expanded,Auth_User_Login,Data_Filter,Auth_User_Signout }
-function mapStateToProps (state) {
-  const { isNavExpanded,User} = state
+function mapStateToProps(state) {
+    const { isNavExpanded, User } = state.blog
   return { isNavExpanded,User }
 }
 export default connect(

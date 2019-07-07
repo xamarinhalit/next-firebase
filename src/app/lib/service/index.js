@@ -1,6 +1,7 @@
 import LoadDb,{GetDbUrl} from "../firestore";
 
 import uuid from 'uuid';
+import { functions } from "firebase";
 
 export async function GetFirestore (){
   return await new Promise(async (resolve,reject)=>{
@@ -126,27 +127,30 @@ export async function GetDatabase (){
         });
     }
   }
-  export const Data_List_Remove =async (data)=>{
-    let {User,postid}=data;
-    console.log(postid);
+export const Data_List_Remove = async (data) => {
+    let { User, postid } = data;
     if(User!=null){
       return await new Promise(async (resolve,reject)=>{
         try {
-          let firebase=await LoadDb();
-          let ref=firebase.database().ref("/next-db");
-          let refpost=firebase.database().ref("/next-postuser");
-          
-         let refvalue= ref.startAt(`%${postid}%`)
-         .endAt(postid+"\uf8ff")
-         .remove();
-          refpost.startAt(`%${User.email}%`)
-          .endAt(User.email+"\uf8ff").remove().then(()=>{
-            console.log("post silindi",refpost.child(postid));
-          }).catch(()=>{
-            console.log("error");
-          });
+            let firebase = await LoadDb();
+           let db = firebase.database()
+           db.ref("/next-db").orderByChild(`${postid}`).once("value").then(function (snapshot) {
+                snapshot.forEach(function (child) {
+                    let val = child.val();
+                    if (val.id == postid)
+                        child.ref.remove();
+                });
+           });
+            db.ref("/next-postuser").orderByChild(`${User.id}`).once("value").then(function (snapshot) {
+                snapshot.forEach(function (child) {
+                    let val = child.val();
+                    if (val.postid == postid && User.email == val.email)
+                        child.ref.remove();
+                });
+            });;
             resolve(null);
-          } catch (e) {
+        } catch (e) {
+            console.log(e);
             reject(e);
           }
         });

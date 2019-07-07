@@ -6,7 +6,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
  class about extends Component {
-  render() {
+     render() {
+         let { MapList } = this.props;
     return (<div>
        <Navs></Navs>
       <Jumbotron >
@@ -15,7 +16,7 @@ import { connect } from 'react-redux';
           <Row >
             <Col sm={3}>
             <Nav  variant="pills" className="flex-column">
-            {this.props.MapList.map((item,index)=>(
+            {MapList.map((item,index)=>(
             <Nav.Item key={index}>
               <Nav.Link eventKey={item.key}  >{item.name}</Nav.Link>
             </Nav.Item>
@@ -25,7 +26,7 @@ import { connect } from 'react-redux';
             </Col>
             <Col sm={9}>
               <Tab.Content>
-              {this.props.MapList.map((item,index)=>(
+              {MapList.map((item,index)=>(
                  <Tab.Pane eventKey={item.key} key={index}>
                  {item.name}
                  </Tab.Pane>
@@ -39,8 +40,8 @@ import { connect } from 'react-redux';
   }
 }
 function mapStateToProps (state) {
-  const { MapList } = state
-  return { MapList, }
+  const { MapList } = state.blog
+  return { MapList }
 }
 export default connect(
   mapStateToProps
