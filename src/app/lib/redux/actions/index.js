@@ -40,6 +40,9 @@ export const Data_Filter = (payload) => {
 export const DataList_Add = (payload) => {
   return { type: actionTypes.DATA_LIST_ADD, payload:payload };
 }
+export const DataList_Remove = (payload) => {
+  return { type: actionTypes.DATA_LIST_REMOVE, payload:payload };
+}
 // export const DataList_Add_Success = (payload) => {
 //   return { type: actionTypes.DATA_LIST_ADD_SUCCESS, payload:payload };
 // }

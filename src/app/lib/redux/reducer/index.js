@@ -1,6 +1,6 @@
 import { actionTypes} from '../constants';
 import {InitialState} from '../state';
-import {Data_List_Add} from '../../service';
+import {Data_List_Add,Data_List_Remove} from '../../service';
 
 
 
@@ -34,10 +34,18 @@ import {Data_List_Add} from '../../service';
         return Object.assign({}, state, {
           User: state.DefaultUser
         })
-        // case actionTypes.DATA_LIST_ADD_SUCCESS:
-        // return Object.assign({}, state, {
-        //   IsAddSuccess:action.payload
-        // })
+        case actionTypes.DATA_LIST_REMOVE:
+        if(state.IsAuth && state.User.email!=undefined && state.User.email!=null){
+          try {
+            Data_List_Remove({User:{...state.User},postid:action.payload}).then(()=>{
+              console.log(action.payload+"  silindi..");
+            }).catch(()=>{
+              console.log(action.payload+"  silinemedi..");
+            });
+          } catch (error) {
+          }
+        }
+        return state;
         case actionTypes.DATA_LIST_ADD:
         if(state.IsAuth && state.User.email!=undefined && state.User.email!=null){
           try {

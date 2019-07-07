@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import App from '../components/about';
+import { About } from '../components';
 
 class Index extends React.Component {
   render () {
-    return <App />
+      return <About />
   }
 }
 export default connect(

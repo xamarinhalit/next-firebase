@@ -73,3 +73,5 @@ next/
 
 #firebase
 .firebaserc
+/.vs
+/.vscode

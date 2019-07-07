@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { serverRenderOnce,clientRenderOn,On_Auth_State_Changed } from '../lib/redux/actions'
-import App from '../components';
+import { serverRenderOnce, clientRenderOn, On_Auth_State_Changed } from '../lib/redux/actions'
+import { Home } from '../components';
 class Index extends React.Component {
   static getInitialProps ({ reduxStore, req ,dispatch}) {
     this.boundActionCreators = bindActionCreators({ serverRenderOnce,clientRenderOn,On_Auth_State_Changed }, dispatch)
@@ -22,7 +22,7 @@ class Index extends React.Component {
      });
   }
   render () {
-    return <App {...this.props.boundActionCreators}/>
+      return <Home {...this.props.boundActionCreators}/>
   }
 }
 

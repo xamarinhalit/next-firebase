@@ -7,6 +7,11 @@ import {bindActionCreators} from 'redux'
 
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faTrash, faKey } from '@fortawesome/free-solid-svg-icons';
+
+// library.add(faTrash, faKey);
+
 
 // import  "./../static/css/bootstrap.css";
 

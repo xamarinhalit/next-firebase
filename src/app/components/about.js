@@ -1,8 +1,7 @@
 // src/app/pages/About.js
-import { Jumbotron,Row,Tab,Col,Nav} from 'react-bootstrap';
-
+import { Jumbotron, Row, Tab, Col, Nav } from 'react-bootstrap';
+import { Navs } from './index';
 import React, { Component } from 'react'
-import Navs from './Navs';
 
 import { connect } from 'react-redux';
 
