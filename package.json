@@ -37,6 +37,7 @@
     "next-babel-minify": "^1.0.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
+    "react-credit-cards": "^0.7.0",
     "react-dom": "^16.8.6",
     "react-pose": "^4.0.8",
     "react-redux": "^7.1.0",

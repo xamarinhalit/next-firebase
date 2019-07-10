@@ -1,6 +1,6 @@
 // src/app/next.config.js
 const webpack = require('webpack');
-//const withSass = require('@zeit/next-sass');
+const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
 const fs = require('fs');
 const dotenv = require('dotenv');
@@ -14,7 +14,7 @@ const withMDX = require('@next/mdx')()
 
 
 
-module.exports =withBabelMinify(withCss(withMDX({
+module.exports = withBabelMinify(withSass(withCss(withMDX({
    // target: "serverless",
     distDir: "../../dist/functions/next",
     
@@ -29,4 +29,4 @@ module.exports =withBabelMinify(withCss(withMDX({
   
       return config;
     }
-  })));
+  }))));

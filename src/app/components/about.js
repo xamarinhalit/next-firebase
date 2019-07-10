@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
          let { MapList } = this.props;
     return (<div>
        <Navs></Navs>
-      <Jumbotron >
+        <Jumbotron style={{ height: 91 + "vh", marginBottom: 0 }}>
         <h2>Firestore ve Realtime Database Data Çekme</h2>
         <Tab.Container id="left-tabs-example" defaultActiveKey="1" >
           <Row >

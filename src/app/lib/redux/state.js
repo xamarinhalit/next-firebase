@@ -31,5 +31,8 @@ export const InitialState = {
                 { name: "firebase-database", key: "8" },
                 { name: "firebase-authenticate", key: "9" }
             ]
+    },
+        payment: {
+
         }
   }

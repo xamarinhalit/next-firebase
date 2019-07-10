@@ -13,7 +13,7 @@ class index extends Component {
   render(){
     return(<div>
        <Navs></Navs>
-      <Jumbotron>
+        <Jumbotron style={{ height: 91 + "vh", marginBottom: 0 }}>
         <h1>Realtime Database</h1>
         <Row>
           <Data_Add />

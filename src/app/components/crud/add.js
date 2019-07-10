@@ -1,12 +1,7 @@
-import posed, { PoseGroup } from 'react-pose';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {DataList_Add} from '../../lib/redux/actions';
 import {Form,Button,Col,Row,Alert } from 'react-bootstrap';
-
-const ChildStyle = {
-  cursor:'pointer'
-};
 
 class Data_Add extends Component {
   constructor(props){
