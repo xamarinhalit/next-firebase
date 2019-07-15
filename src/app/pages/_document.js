@@ -37,11 +37,13 @@ class MyDocument extends Document {
                     <meta name="description" content="Nextjs kullanımı,React,redux,realtime database kullanımı,firebase hosting,Scss kullanımı,nosql örneği,redux-persis örnek"/>
                     <meta name="keywords" content="databaseyapim,misafir,aŞamasiyapilacakla,yaprealtime,giriş,firebase,next" />
                     <meta name="robots" content="noindex,nofollow"/>
-                    
+                  
         </Head>
         <body>
           <Main />
           <NextScript />
+          <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         </body>
       </Html>
     );
