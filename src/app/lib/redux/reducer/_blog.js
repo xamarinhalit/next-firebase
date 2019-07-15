@@ -4,7 +4,7 @@ import {Data_List_Add,Data_List_Remove} from '../../service';
 
 
 
-  // REDUCERS
+// REDUCERS
 export const reducer = (state = InitialState, action) => {
     switch (action.type) {
       case actionTypes.FIREBASE_ONCE:
@@ -51,10 +51,10 @@ export const reducer = (state = InitialState, action) => {
         }
         return state;
         case actionTypes.DATA_LIST_ADD:
-           
-            if (state.IsAuth && state.User.email){
-          try {
-              Data_List_Add({ ...action.payload, User: { ...state.User}}).then(data=>{
+
+            if (state.IsAuth && state.User.email) {
+                try {
+                    Data_List_Add({ ...action.payload, User: { ...state.User } }).then(data => {
              // reducer(state, { type: actionTypes.DATA_LIST_ADD_SUCCESS, payload:true })
             }).catch(e=>{
               //reducer(state, { type: actionTypes.DATA_LIST_ADD_SUCCESS, payload:false })
@@ -69,20 +69,17 @@ export const reducer = (state = InitialState, action) => {
        
         case actionTypes.ON_AUTH_STATE_CHANGED:
             return Object.assign({}, state, {
-                   
                     IsAuth: action.payload
         })
         case actionTypes.DATA_FILTER:
-        if(action.payload.path=="/about"){
-          let rs= OldMapList.filter(function(val){return val.name.includes(action.payload.data)});
-            return Object.assign({}, state, {
-                   
-                    MapList: rs,
+            if (action.payload.path == "/about") {
+          let rs= state.OldMapList.filter(function(val){return val.name.includes(action.payload.data)});
+                return Object.assign({}, state, {
+                        MapList: { ...rs },
           })
-        }else{
-          let rs= OldResult.filter(function(val){return val.name.includes(action.payload.data)});
+            } else {
+                let rs = state.OldResult.filter(function (val) { return val.name.includes(action.payload.data) });
             return Object.assign({}, state, {
-                   
                     Result: { ...rs },
           })
         }

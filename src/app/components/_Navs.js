@@ -46,6 +46,7 @@ class Navs extends Component {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/" rel="nofollow">Anasayfa</Nav.Link>
+          <Nav.Link href="/drag"  rel="nofollow"> Drag Show</Nav.Link>
           <Nav.Link href="/about"  rel="nofollow"> Hakkında</Nav.Link>
           <Form inline>
             <FormControl type="text" placeholder="Arama" className="mr-sm-2 ml-sm-2" onChange={this.SearchData} value={this.state.search}>
